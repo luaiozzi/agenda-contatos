@@ -1,0 +1,23 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: src/Agenda.Api/Dockerfile
+    ports:
+      - "5080:8080"          # Swagger: http://localhost:5080/swagger
+    volumes:
+      - agenda-data:/data    # banco SQLite persistente
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "8080:80"            # Aplicação: http://localhost:8080
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  agenda-data:
