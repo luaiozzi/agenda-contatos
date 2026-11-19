@@ -5,6 +5,12 @@ services:
       dockerfile: src/Agenda.Api/Dockerfile
     ports:
       - "5080:8080"          # Swagger: http://localhost:5080/swagger
+    environment:
+      # Segredo do JWT (mínimo de 32 caracteres). Para trocar, crie um arquivo .env (veja .env.example).
+      Jwt__Key: "${JWT_KEY:-dev-only-chave-secreta-da-agenda-troque-em-producao-0123456789}"
+      # Usuário criado na primeira execução.
+      Seed__AdminEmail: "${ADMIN_EMAIL:-admin@agenda.com}"
+      Seed__AdminPassword: "${ADMIN_PASSWORD:-Admin@123}"
     volumes:
       - agenda-data:/data    # banco SQLite persistente
     restart: unless-stopped

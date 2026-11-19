@@ -34,6 +34,22 @@ body {
   color: #52606d;
 }
 
+.header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.user-email {
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #52606d;
+  font-size: 0.9rem;
+}
+
 .toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -75,4 +91,32 @@ body {
 
 .full-width {
   width: 100%;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 24rem;
+  padding: 2rem 1.5rem;
+}
+
+.login-card h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.login-subtitle {
+  margin: 0.25rem 0 1.5rem;
+  color: #52606d;
+}
+
+.login-message {
+  margin-bottom: 1rem;
 }

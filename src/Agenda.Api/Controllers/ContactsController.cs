@@ -1,11 +1,13 @@
 using Agenda.Api.Dtos;
 using Agenda.Api.Models;
 using Agenda.Api.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Agenda.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 [Produces("application/json")]
 public class ContactsController : ControllerBase

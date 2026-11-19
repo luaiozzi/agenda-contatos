@@ -35,3 +35,24 @@ export function validateContact({ name, email, phone }) {
 
   return errors;
 }
+
+/**
+ * Valida os dados do formulário de login.
+ * Retorna um objeto { campo: 'mensagem' } (vazio quando tudo é válido).
+ */
+export function validateLogin({ email, password }) {
+  const errors = {};
+
+  const trimmedEmail = String(email ?? '').trim();
+  if (!trimmedEmail) {
+    errors.email = 'O e-mail é obrigatório.';
+  } else if (!EMAIL_REGEX.test(trimmedEmail)) {
+    errors.email = 'Informe um e-mail válido.';
+  }
+
+  if (!password) {
+    errors.password = 'A senha é obrigatória.';
+  }
+
+  return errors;
+}

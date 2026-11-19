@@ -18,10 +18,15 @@ node_modules/
 dist/
 npm-debug.log*
 
-# Variáveis de ambiente locais (o modelo .env.example continua versionado)
+# Segredos e configurações locais (os modelos *.example continuam versionados)
 .env
 .env.local
 .env.*.local
+appsettings.Local.json
+appsettings.*.local.json
+secrets.json
+*.pfx
+*.pem
 
 # Logs e saídas de comandos
 *.log

@@ -8,9 +8,11 @@ import ContactFormDialog from '../components/ContactFormDialog.vue';
 import SearchBox from '../components/SearchBox.vue';
 import { contactService } from '../services/contactService';
 import { ApiError } from '../services/api';
+import { useAuth } from '../composables/useAuth';
 
 const toast = useToast();
 const confirm = useConfirm();
+const { email: userEmail, logout } = useAuth();
 
 const contacts = ref([]);
 const total = ref(0);
@@ -29,6 +31,11 @@ function notify(severity, summary, detail) {
 }
 
 function notifyError(error, fallback) {
+  // 401: a sessão expirou. O aviso e a volta ao login são feitos pelo App.vue.
+  if (error instanceof ApiError && error.status === 401) {
+    return;
+  }
+
   const message = error instanceof ApiError ? error.message : fallback;
   notify('error', 'Erro', message);
 }
@@ -145,7 +152,11 @@ onMounted(load);
         <h1>Agenda de Contatos</h1>
         <p>Cadastre, consulte, edite e exclua seus contatos.</p>
       </div>
-      <Button label="Novo contato" icon="pi pi-plus" @click="openCreate" />
+      <div class="header-actions">
+        <span class="user-email" :title="userEmail">{{ userEmail }}</span>
+        <Button label="Novo contato" icon="pi pi-plus" @click="openCreate" />
+        <Button label="Sair" icon="pi pi-sign-out" severity="secondary" outlined @click="logout" />
+      </div>
     </header>
 
     <div class="toolbar">

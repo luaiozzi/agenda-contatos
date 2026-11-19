@@ -53,6 +53,10 @@ public class ExceptionHandlingMiddleware
         {
             await WriteAsync(context, CreateProblem(context, StatusCodes.Status409Conflict, "Conflito.", ex.Message));
         }
+        catch (InvalidCredentialsException ex)
+        {
+            await WriteAsync(context, CreateProblem(context, StatusCodes.Status401Unauthorized, "Não autorizado.", ex.Message));
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Erro não tratado ao processar {Method} {Path}", context.Request.Method, context.Request.Path);
